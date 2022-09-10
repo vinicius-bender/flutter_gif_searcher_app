@@ -52,7 +52,7 @@ class GifAppHomePageState extends State<GifAppHomePage>{
                     borderSide: BorderSide(color: Colors.white),
                   ),
                 ),
-                onSubmitted: (text){
+                onChanged: (text){
                   setState(() {
                     search = text;
                     offseat = 0;
@@ -115,7 +115,7 @@ class GifAppHomePageState extends State<GifAppHomePage>{
   Future<Map> getSearch () async{
 
     http.Response response;
-    var url = Uri.parse("https://api.giphy.com/v1/gifs/trending?api_key=ROV2CsXKmkEA4RtXw5VyUI23w9pEcQwr&limit=19&rating=g");
+    var url = Uri.parse("https://api.giphy.com/v1/gifs/trending?api_key=ROV2CsXKmkEA4RtXw5VyUI23w9pEcQwr&limit=20&rating=g");
     var url2 = Uri.parse("https://api.giphy.com/v1/gifs/search?api_key=ROV2CsXKmkEA4RtXw5VyUI23w9pEcQwr&q=$search&limit=19&offset=$offseat&rating=g&lang=en");
     
 
@@ -152,7 +152,7 @@ class GifAppHomePageState extends State<GifAppHomePage>{
           fit: BoxFit.cover,
           ),
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> GifPage(snapshot.data["data"]["index"])));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> GifPage(snapshot.data["data"][index])));
           },
           onLongPress: () {
             FlutterShare.share(linkUrl: snapshot.data["data"][index]["images"]["fixed_height"]["url"], title: snapshot.data["images"][index]["title"]);
